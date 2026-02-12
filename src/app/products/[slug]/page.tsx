@@ -3,12 +3,12 @@ import Image from "next/image";
 import { getProductBySlug } from "@/lib/content";
 import { siteConfig } from "@/content/site.config";
 
-type ProductPageProps = {
-  params: { slug: string };
+type Props = {
+  params: Promise<{ slug: string }>;
 };
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const { slug } = params;
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
   const product = getProductBySlug(slug);
 
   if (!product) {
